@@ -1,7 +1,7 @@
 import React from 'react';
 
-const AlpacaArt = (attr) => {
-  const { accessories, bg, ears, eyes, hair, leg, mouth, neck, nose } = attr
+const AlpacaArt = ({attr}) => {
+  const { accessories, bg, ears, eyes, hair, leg, mouth, neck, nose } = attr;
   return (
     <>
       <img src={accessories} alt="accessories" />
@@ -12,7 +12,7 @@ const AlpacaArt = (attr) => {
       <img src={leg} alt="leg" />
       <img src={mouth} alt="mouth" />
       <img src={neck} alt="neck" />
-      <img src={nose} alt="now" />
+      <img src={nose} alt="nose" />
     </>
   );
 };
