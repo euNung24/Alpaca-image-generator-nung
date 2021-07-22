@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { alpacaConfig } from '../AlpacaConfig';
 import getImage from '../utils/getImage';
 import AlpacaArt from './AlpacaArt';
 import Button from './Button';
 import Control from './Control';
+import Header from './Header';
 
 const Alpaca = () => {
   const [ config, setConfig ] = useState(alpacaConfig);
@@ -77,17 +78,39 @@ const Alpaca = () => {
     })
   }
 
+  useEffect(() => {
+    const renderAlpaca = () => {
+      config.forEach(feature => {
+        const attribute = feature.items.filter(item => 
+          item.fileName === 'default'
+        )[0]
+        changeImage(feature, attribute);
+      })
+    }
+    renderAlpaca()
+  }, [])
+
+
   const attr = {
     accessories, bg, ears, eyes, hair, leg, mouth, neck, nose
   }
 
   return (
     <div>
-      {config.map(feature => 
-        <Control key={feature.id} feature={feature} setAttribute={setAttribute} />
-      )}
-      <Button key={feature.id} feature={feature} changeImage={changeImage}/>
-      <AlpacaArt attr={attr} />
+      <Header />
+      <div className="container">
+        <div className="left">
+          <AlpacaArt attr={attr} />
+        </div>
+        <div className="right">
+          <p>Accessorize your Alpaca</p>
+          {config.map(feature => 
+            <Control key={feature.id} feature={feature} setAttribute={setAttribute} />
+          )}
+          <br/>
+          <Button key={feature.id} feature={feature} changeImage={changeImage}/>
+        </div>
+      </div>
     </div>
   );
 };
