@@ -6,6 +6,7 @@ import Control from './Control';
 
 const Alpaca = () => {
   const [ config, setConfig ] = useState(alpacaConfig);
+  const [ feature, setFeature] = useState(config[0]);
 
   // const [ accessories, setAccessories ] = useState(null);
   // const [ bg, setBg ] = useState(null);
@@ -23,9 +24,19 @@ const Alpaca = () => {
     configClone.forEach(cfg => cfg.selected = false);
     configClone[getIndex].selected = true;
     setConfig(configClone);
+    setFeature(configClone[getIndex]);
   }
 
-  
+  const changeImage = (feature, attribute) => {
+    const configClone = [...config];
+    const getIndex = configClone.indexOf(feature);
+    const configItems = configClone[getIndex].items;
+    const getAttrIndex =  configItems.indexOf(attribute);
+    configItems.forEach(item => item.selected = false);
+    configItems[getAttrIndex].selected = true;
+    setConfig(configClone);
+    console.log(config);
+  }
 
   // const attr = {
   //   accessories, bg, ears, eyes, hair, leg, mouth, neck, nose
@@ -37,7 +48,7 @@ const Alpaca = () => {
       {config.map(feature => 
         <Control key={feature.id} feature={feature} setAttribute={setAttribute} />
       )}
-      <Button />
+      <Button key={feature.id} feature={feature} changeImage={changeImage}/>
     </div>
   );
 };

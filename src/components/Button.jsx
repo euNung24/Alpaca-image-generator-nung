@@ -1,10 +1,14 @@
 import React from 'react';
 
-const Button = () => {
+const Button = ({feature, changeImage}) => {
   return (
-    <div>
-      
-    </div>
+    <>
+      {feature.items.map(attr => 
+        <button key={attr.id} onClick={() => changeImage(feature, attr)}>
+          {attr.label}
+        </button>
+      )}
+    </>
   );
 };
 
