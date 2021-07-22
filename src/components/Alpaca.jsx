@@ -84,6 +84,7 @@ const Alpaca = () => {
         const attribute = feature.items.filter(item => 
           item.fileName === 'default'
         )[0]
+        console.log(attribute);
         changeImage(feature, attribute);
       })
     }

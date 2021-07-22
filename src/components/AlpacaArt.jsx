@@ -5,14 +5,14 @@ const AlpacaArt = ({attr}) => {
   return (
     <>
       <img src={bg} alt="background" className="bg"/>
-      <img src={accessories} alt="accessories" className="not_bg accessories"/>
-      <img src={ears} alt="ears" className="not_bg ears"/>
-      <img src={eyes} alt="eyes" className="not_bg eyes"/>
-      <img src={hair} alt="hair" className="not_bg hair"/>
-      <img src={leg} alt="leg" className="not_bg leg"/>
-      <img src={mouth} alt="mouth" className="not_bg mouth"/>
-      <img src={neck} alt="neck" className="not_bg neck"/>
-      <img src={nose} alt="nose" className="not_bg nose"/>
+      <img src={accessories} alt="accessories" className="accessories"/>
+      <img src={ears} alt="ears" className="ears"/>
+      <img src={eyes} alt="eyes" className="eyes"/>
+      <img src={hair} alt="hair" className="hair"/>
+      <img src={leg} alt="leg" className="leg"/>
+      <img src={mouth} alt="mouth" className="mouth"/>
+      <img src={neck} alt="neck" className="neck"/>
+      <img src={nose} alt="nose" className="nose"/>
     </>
   );
 };

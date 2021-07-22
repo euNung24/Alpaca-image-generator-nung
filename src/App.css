@@ -1,0 +1,78 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 100px;
+}
+
+.header {
+  margin: 50px 0;
+}
+
+.container {
+  display: flex;
+}
+
+.left {
+  position: relative;
+  width: 40%;
+}
+
+.right {
+  width: 60%;
+}
+
+img {
+  position: absolute;
+  max-width: 100%;
+  left: 0;
+}
+
+.right {
+  margin-left: 50px;
+}
+
+.button {
+  color: #fff;
+  font-weight: bold;
+  background: transparent;
+  border: 2px solid #fff;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.button:hover {
+  cursor: pointer;
+  background: #fff;
+  color: #000;
+}
+
+/* AlpacaArt */
+body {
+  background: rgb(108, 44, 114);
+}
+
+.bg {
+  z-index: 0;
+}
+
+.neck,
+.leg {
+  z-index: 5;
+}
+
+.nose,
+.ears {
+  z-index: 10;
+}
+
+.mouth,
+.accessories {
+  z-index: 15;
+}
+
+.eyes {
+  z-index: 20;
+}
