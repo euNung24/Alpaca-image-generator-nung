@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { alpacaConfig } from '../AlpacaConfig';
 import getImage from '../utils/getImage';
+import randomize from '../utils/randomize';
 import AlpacaArt from './AlpacaArt';
 import Button from './Button';
 import Control from './Control';
@@ -96,6 +97,57 @@ const Alpaca = () => {
     accessories, bg, ears, eyes, hair, leg, mouth, neck, nose
   }
 
+  const setRandomize = () => {
+    const configClone = [...config]
+    const featureId = configClone.map(cfg => cfg.id);
+    const itemId = configClone.map(cgf => cgf.items.length);
+    console.log(featureId, itemId);
+    const getRandomItemId = itemId.map(id=> randomize(id));
+    configClone.forEach(cfg => cfg.selected = false);
+    configClone.forEach(cfg => cfg.items.forEach(item => item.selected = false));
+    configClone.forEach(cfg => cfg.items[getRandomItemId[cfg.id]].selected = true);
+    setConfig(configClone);
+    console.log(getRandomItemId);
+
+    configClone.map(cfg => {
+      const dir = cfg.dir;
+      const fileName = cfg.items[getRandomItemId[cfg.id]].fileName;
+      getImage(dir, fileName, image => {
+        switch(dir) {
+          case 'backgrounds':
+            setBg(image)
+            break
+          case 'accessories':
+            setAccessories(image)
+            break
+          case 'ears':
+            setEars(image)
+            break
+          case 'eyes':
+            setEyes(image)
+            break
+          case 'hair':
+            setHair(image)
+            break
+          case 'leg':
+            setLeg(image)
+            break
+          case 'mouth':
+            setMouth(image)
+            break
+          case 'neck':
+            setNeck(image)
+            break
+          case 'nose':
+            setNose(image)
+            break
+          default:
+            break   
+        }
+      })
+    })   
+  }
+
   return (
     <div>
       <Header />
@@ -110,6 +162,9 @@ const Alpaca = () => {
           )}
           <br/>
           <Button key={feature.id} feature={feature} changeImage={changeImage}/>
+        </div>
+        <div>
+          <button onClick={setRandomize}>Random Custom</button>
         </div>
       </div>
     </div>
