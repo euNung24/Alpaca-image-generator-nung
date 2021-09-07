@@ -6,6 +6,7 @@ import AlpacaArt from './AlpacaArt';
 import Button from './Button';
 import Control from './Control';
 import Header from './Header';
+import Randomize from './Randomize';
 
 const Alpaca = () => {
   const [ config, setConfig ] = useState(alpacaConfig);
@@ -38,11 +39,11 @@ const Alpaca = () => {
     configItems.forEach(item => item.selected = false);
     configItems[getAttrIndex].selected = true;
     setConfig(configClone);
-    console.log(config);
+    // console.log(config);
 
     const { dir } = feature;
     const { fileName } = attribute;
-    console.log(feature.dir, attribute.fileName);
+    // console.log(feature.dir, attribute.fileName);
 
     getImage(dir, fileName, image => {
       switch(dir) {
@@ -85,7 +86,7 @@ const Alpaca = () => {
         const attribute = feature.items.filter(item => 
           item.fileName === 'default'
         )[0]
-        console.log(attribute);
+        // console.log(attribute);
         changeImage(feature, attribute);
       })
     }
@@ -99,19 +100,18 @@ const Alpaca = () => {
 
   const setRandomize = () => {
     const configClone = [...config]
-    const featureId = configClone.map(cfg => cfg.id);
     const itemId = configClone.map(cgf => cgf.items.length);
-    console.log(featureId, itemId);
+    // console.log(featureId, itemId);
     const getRandomItemId = itemId.map(id=> randomize(id));
     configClone.forEach(cfg => cfg.selected = false);
     configClone.forEach(cfg => cfg.items.forEach(item => item.selected = false));
     configClone.forEach(cfg => cfg.items[getRandomItemId[cfg.id]].selected = true);
     setConfig(configClone);
-    console.log(getRandomItemId);
+    // console.log(getRandomItemId);
 
     configClone.map(cfg => {
       const dir = cfg.dir;
-      const fileName = cfg.items[getRandomItemId[cfg.id]].fileName;
+      const fileName = cfg.items[getRandomItemId[cfg.id]].selected && cfg.items[getRandomItemId[cfg.id]].fileName;
       getImage(dir, fileName, image => {
         switch(dir) {
           case 'backgrounds':
@@ -152,19 +152,18 @@ const Alpaca = () => {
     <div>
       <Header />
       <div className="container">
-        <div className="left">
-          <AlpacaArt attr={attr} />
+        <div className="cont-left">
+          <div className="left">
+            <AlpacaArt attr={attr} onPress={setRandomize}/>
+          </div>
+          <Randomize onPress={setRandomize} />
         </div>
         <div className="right">
           <p>Accessorize your Alpaca</p>
           {config.map(feature => 
             <Control key={feature.id} feature={feature} setAttribute={setAttribute} />
           )}
-          <br/>
           <Button key={feature.id} feature={feature} changeImage={changeImage}/>
-        </div>
-        <div>
-          <button onClick={setRandomize}>Random Custom</button>
         </div>
       </div>
     </div>

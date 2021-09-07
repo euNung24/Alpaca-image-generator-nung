@@ -4,7 +4,7 @@ const Header = () => {
   return (
     <div className="header">
       <h2>Alpaca Image Generator 
-        <a href="##">EunYoung</a> 
+        <span>- EunYoung</span> 
       </h2>
     </div>
   );
